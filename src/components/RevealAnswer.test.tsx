@@ -66,4 +66,48 @@ describe("Reveal Answer", () => {
         expect(toggleAnswerButton).toBeVisible();
     });
     //*/
+
+    //-----Toggle Hint Visibility Test starts here-----
+
+    test("There is a Toggle Hint Visibility button", () => {
+        const toggleHintButton = screen.getByRole("button", {
+            name: /Toggle Hint Visibility/i,
+        });
+        expect(toggleHintButton).toBeInTheDocument();
+    });
+
+    // Click Toggle Answer Visibility button, system shows answer
+    test("Click Toggle Answer Visibility button, system shows answer", async () => {
+        const toggleHintButton = screen.getByRole("button", {
+            name: /Toggle Hint Visibility/i,
+        });
+        await act(async () => {
+            toggleHintButton.click();
+        });
+        //system shows answer
+        expectAnswerIsPresent(true);
+    });
+
+    // /*
+    // Click Toggle Answer Visibility button, system shows answer
+    test("Click Toggle Hint Visibility button, click answer button again, system hides Hint", async () => {
+        const toggleHintButton = screen.getByRole("button", {
+            name: /Toggle Hint Visibility/i,
+        });
+        await act(async () => {
+            toggleHintButton.click();
+        });
+        await act(async () => {
+            toggleHintButton.click();
+        });
+
+        //system hides answer
+        expectAnswerIsPresent(false);
+
+        // answer button still there
+        // only testing this because this component changes visibility
+        // so an easy bug would be hiding too much on the page
+        expect(toggleHintButton).toBeVisible();
+    });
+    //*/
 });
